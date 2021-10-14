@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-
-
+    
    public float speed;
+
   public  float speedX;
   public  float speedY;
   public Transform barA;
   public Transform barB;
+
     private Vector3 originPos;
     // Start is called before the first frame update
     void Start()
@@ -44,10 +45,13 @@ public class Ball : MonoBehaviour
 
 
 
+
+
     // Update is called once per frame
     void Update()
     {
         transform.Translate(new Vector3(speedX, speedY, 0));
+
         
         if (transform.position.x >= 8.5f) {
             RestartPong();
@@ -58,6 +62,16 @@ public class Ball : MonoBehaviour
         }
         
 
+
+
+
+        if (transform.position.x > 9.0f) {
+            speedX = speedX * -1;
+        }
+        if (transform.position.x < -9.0f)
+        {
+            speedX = speedX * -1;
+        }
 
         if (transform.position.y > 5f)
         {
