@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    
-   public float speed;
+
+    public float speed, oringinSpeed;
 
   public  float speedX;
   public  float speedY;
@@ -16,6 +16,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        oringinSpeed = speed;
         originPos = this.transform.position;
         RestartPong();
     }
@@ -36,8 +37,8 @@ public class Ball : MonoBehaviour
         RestLock = true;
         yield return new WaitForSeconds(3);
 
-        speedX = speed;
-        speedY = speed;
+        speedX = oringinSpeed;
+        speedY = oringinSpeed;
 
         
         RestLock = false;
@@ -53,10 +54,10 @@ public class Ball : MonoBehaviour
         transform.Translate(new Vector3(speedX, speedY, 0));
 
         
-        if (transform.position.x >= 8.5f) {
+        if (transform.position.x >= 8f) {
             RestartPong();
         }
-        if (transform.position.x <= -8.5f)
+        if (transform.position.x <= -8f)
         {
             RestartPong();
         }
@@ -85,7 +86,11 @@ public class Ball : MonoBehaviour
 
             if (transform.position.y > barA.transform.position.y - barA.localScale.y / 2 && transform.position.y < barA.transform.position.y + barA.localScale.y / 2) {
 
+                speedX += 0.003f;
+
                 speedX = speedX * -1;
+
+                
             }
             
 
@@ -93,7 +98,8 @@ public class Ball : MonoBehaviour
         if (transform.position.x  <= barB.position.x)
         {
             if (transform.position.y > barB.transform.position.y - barB.localScale.y / 2 && transform.position.y < barB.transform.position.y + barB.localScale.y / 2)
-            { 
+            {
+                speedX += 0.003f;
                 speedX = speedX * -1;
             }
         }
